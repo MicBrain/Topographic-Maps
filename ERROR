@@ -1,0 +1,16 @@
+   I made a an autograder test for Basics3 and I am passing the test.
+However, I am getting an assertion error when I run this test on my implementation
+of ShortestPath.
+
+   I believe that my implementation of ShortestPath works and I pass all other
+tests. However I think that this is not the full implmentation of A* Algorithm
+and I actually visit Vertex 6.
+
+6
+1) TestSimpleShortPath(graph.PathsTesting)
+    Assertion failed
+    at graph.PathsTesting.TestSimpleShortPath:61 (PathsTesting.java)
+
+P.S. Are we required to implement A* ? Because my implementation looks good to me.
+
+Thank you very much.

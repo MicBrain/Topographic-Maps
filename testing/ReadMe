@@ -1,0 +1,27 @@
+The testing makefile in this directory is set up to allow you to substitute
+selected staff packages (graph, trip, or make) for your own in order to test
+your packages in isolation.  
+
+* To check your make and trip packages against the staff graph package,
+  use the command
+
+       make GRAPHPACK=staff check
+
+* To check your graph package against the staff make and trip packages, use
+
+       make TRIPPACK=staff MAKEPACK=staff check
+
+These parameters to make also work for make-check and trip-check and also
+when running 'make check' in the outer proj3 directory, the proj3/make
+directory or the proj3/trip directory.  You can even check the staff
+implementation against itself (and your own tests) with
+
+       make GRAPHPACK=staff MAKEPACK=staff TRIPPACK=staff check
+
+These options will work on the instructional machines. On your home
+machine, you can copy ~cs61b/lib/staff-graph.jar, ~cs61b/lib/staff-
+make.jar, and ~cs61b/lib/staff-trip.jar into your testing directory
+(or your proj3 directory).  The .jar files are also available in 
+cs61b-software, and the makefile will find them automatically if you use 
+our default login scripts, which define MASTERDIR to be $HOME/cs61b-software.
+

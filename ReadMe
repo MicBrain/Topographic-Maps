@@ -1,0 +1,222 @@
+Project 3: Fun with Graphs
+
+The files in this directory form a very skimpy skeleton that you are flesh
+out into a full system.  You may not add or delete public types, nor
+may you add or delete public or protected members (nested classes or
+interfaces, methods, constructors, class variables, or instance
+variables) or change their types or signatures.  Otherwise, you are
+free to add package private types and private or package private
+members to classes, and generally to change anything else.
+
+
+
+Files:
+
+Makefile:      Does standard tasks such as building the application,
+               cleaning up unneeded files, running tests, and
+               performing style checks.  Used as a configuration file by 
+               the 'gmake' program.
+
+staff-version:
+               A file containing just the name of the current public release
+               version in the public/proj1/tags directory.  (Helpful when
+               trying to figure out what merges to do.)
+
+graph/  Package containing general graph-related data types.
+               
+        Makefile:
+               See above.
+               
+        Graph.java:
+               Interface defining what a "graph" is.
+               
+        GraphObj.java:
+               A non-public partial implementation of Graph.java containing
+               code common to directed and undirected graphs.
+
+        DirectedGraph.java:
+               Implementation of directed graphs.
+               
+        UndirectedGraph.java:
+               Implementation of undirected graphs.
+               
+        GraphFilter.java:
+               A utility implementation of Graphs (intended to be extended)
+               that simply delegates all operations to a previously existing
+               Graph.  Used by LabeledGraph.
+
+        LabeledGraph.java:
+               A graph that adds labels to vertices and edges of a previously
+               existing Graph.
+
+        Traversal.java:
+               Represents a general traversal of a graph.
+
+        BreadthFirstTraversal.java:
+               An implementation of Traversal for breadth-first traversal.
+
+        DepthFirstTraversal.java:
+               An implementation of Traversal for depth-first traversal.
+
+        ShortestPaths.java:
+               Represents a shortest-path tree or single shortest path on
+               a graph, using Dijkstra's algorithms and A* search.
+
+        SimpleShortestPaths.java:
+               An implementation of ShortestPaths.java that provides weighting
+               information separately from the underlying Graph.
+
+        Iteration.java:
+               Abstract class that allows Iterators to be used in foreach
+	       loops (for (T x : E) { ... }).
+
+        Test-related:
+               
+        UnitTest.java:
+                Dispatcher for JUnit tests for graph package.
+
+        GraphTesting.java:
+                A sample unit-testing file intended for basic graph structure.
+
+make/   Package containing the 'make' application.
+
+        Makefile:
+                See above.
+
+        Main.java:    Contains main program for 'make'.
+
+        Depends.java: Dependency graph definition.
+
+        Maker.java:   Contains main logic for 'make' application.
+
+        Rule.java:    Describes a makefile rule
+
+        UnitTest.java:
+                JUnit tests for make package
+               
+trip/   Package containing the 'trip' application.
+
+        Makefile:
+                See above.
+
+        Main.java:       Contains main program for 'trip'.
+
+        Direction.java:  Describes directions (NS, WE, etc.)
+
+        Location.java:   Describes a location on a map.
+
+        Road.java:       Describes a road between two Locations.
+
+        Trip.java:       Contains driver logic for 'trip' application.
+
+        UnitTest.java:
+                JUnit tests for trip package
+
+
+testing/  Files related to integration tests
+
+        testing.py:  Common definitions for tester.py files
+
+        make/        Tests for make application
+               tester.py:    Tester for make
+               *.mk:         Test makefiles
+               *.dir:        Test file information
+               *.in:         Test make targets
+               *.out:        Expected outputs
+               *.err:        Expected error outputs
+
+        trip/        Tests for trip application
+               tester.py:    Tester for make
+               *.mk:         Test makefiles
+               *.dir:        Test file information
+               *.in:         Test make targets
+               *.out:        Expected outputs
+               *.err:        Expected error outputs
+
+
+MERGING CHANGES:
+----------------
+
+If and when we publish new versions of the skeleton, you may want to 
+incorporate those changes in your project.  This is known as "merging".
+Basically, it works like this:
+
+   0. Commit your current files (as with 'hw commit'). NEVER start
+      merging files until you have done this successfully!!!
+   1. Compute the set of differences between the version of the skeleton
+      from which your current code comes and the current version of the
+      skeleton.
+   2. Try to apply these differences to your current code.
+   3. Where the changes in the skeleton overlap your changes, there are
+      "merge conflicts".  Edit the files containing these conflicts and
+      resolve the conflict as appropriate.
+   4. When done, mark the files as no longer being conflicted.
+   5. Commit the new version of your files.  Again, NEVER do
+      additional editing until you have successfully committed.
+
+This process is so common that all widely used version-control systems
+support it with one or more commands.  In Subversion, this is the 'svn
+merge' command.  Rather than have you confront this directly, we've
+introduced the command 'mergeskel' to do steps 1 and 2 and
+'resolveskel' to do step 4.  So,
+
+   A. Put yourself in your project working directory first.
+   B. Commit any changes (hw commit)
+   C. Run mergeskel
+   D. Edit out any conflicts (hw status will tell you which files 
+      have conflicts).
+   E. Run resolveskel, which tells Subversion that the conflicts are 
+      fixed (it otherwise will not let you commit.)
+   F. Commit the results.
+
+If you have files lying around with names like "FOO.merge-right.r1234", you
+haven't resolved something.
+
+The rest of this section explains the full version of what's really
+going on.  We store copies of all versions of the skeleton in staff
+repository files called (on the instructional machines)
+
+       $STAFFREPOS/tags/projN-V
+
+where projN is the project (e.g., proj1) and V is a version number
+(starting at 0).  The current version of the skeleton is in
+
+       $STAFFREPOS/projN
+
+The file staff-version in your project directory, if present, contains the
+the tag name of that skeleton (if it isn't present, the tag name is projN-0,
+as in proj1-0).
+
+In a project working directory, say proj1, after committing all your
+current files, you (or mergeskel) merge in a new version of the
+skeleton (on the instructional machines) by first figuring out (using
+staff-version, if present) what was the last version you updated to.
+Suppose this is proj1-0.  Now you enter the commands
+
+        svn merge --accept=postpone $STAFFREPOS/tags/proj1-0 $STAFFREPOS/proj1
+
+This produces some progress messages, possibly including some messages
+about conflicts.  If there are no conflicts, you can simply commit your files
+and you are done.
+
+Otherwise, each file with conflicts will have sections like this
+
+    <<<<<<< .working
+         System.out.println ("Welcome to my project");
+         initialize ();
+    =======
+         initialize (args);
+    >>>>>>> .merge-right.r1009
+
+The part before the ======= was in your file to start with.  The part after 
+======= is from the updated version of the skeleton.  Choose which you
+want to use, or what combination you want to use and edit accordingly.
+Then remove the marker lines (<<<<, >>>>, ====) and save.  Do this for 
+all conflicted files.  Finally, you (or resolveskel) can run the command 
+
+    svn resolved --accept working <FILE>
+
+for each <FILE> you have resolved in this way.  If you've done this
+right, 'hw status' will no longer show conflicts (just modified
+files).  Now commit your work and you're done.
+
